@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports: ['8080:8080']
+    depends_on:
+      - auth-service
+      - accounts-service
+      - transactions-service
+      - notifications-service
+      - statements-service
+      - ledger-service
+      - cards-service
+      - loans-service
+      - kyc-service
+      - fraud-service
+      - analytics-service
+      - billing-service
+      - customer-profile-service
+      - email-service
+      - sms-service
+  auth-service:
+    build: ./auth-service
+  accounts-service:
+    build: ./accounts-service
+  transactions-service:
+    build: ./transactions-service
+  notifications-service:
+    build: ./notifications-service
+  statements-service:
+    build: ./statements-service
+  ledger-service:
+    build: ./ledger-service
+  cards-service:
+    build: ./cards-service
+  loans-service:
+    build: ./loans-service
+  kyc-service:
+    build: ./kyc-service
+  fraud-service:
+    build: ./fraud-service
+  analytics-service:
+    build: ./analytics-service
+  billing-service:
+    build: ./billing-service
+  customer-profile-service:
+    build: ./customer-profile-service
+  email-service:
+    build: ./email-service
+  sms-service:
+    build: ./sms-service
+  customer-frontend:
+    build: ./customer-frontend
+    ports: ['3000:3000']
+  admin-frontend:
+    build: ./admin-frontend
+    ports: ['3001:3001']
+  partner-frontend:
+    build: ./partner-frontend
+    ports: ['3002:3002']
+  mobile-frontend:
+    build: ./mobile-frontend
+    ports: ['3003:3003']

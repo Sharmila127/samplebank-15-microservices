@@ -1,0 +1,23 @@
+const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const app = express();
+app.use(express.json());
+app.get('/health', (req,res)=> res.json({status:'ok', service:'api-gateway'}));
+app.use('/auth', createProxyMiddleware({ target: 'http://auth-service:4100', changeOrigin: true, pathRewrite: {'^/auth':''} }));
+app.use('/accounts', createProxyMiddleware({ target: 'http://accounts-service:4101', changeOrigin: true, pathRewrite: {'^/accounts':''} }));
+app.use('/tx', createProxyMiddleware({ target: 'http://transactions-service:4102', changeOrigin: true, pathRewrite: {'^/tx':''} }));
+app.use('/notify', createProxyMiddleware({ target: 'http://notifications-service:4103', changeOrigin: true, pathRewrite: {'^/notify':''} }));
+app.use('/statements', createProxyMiddleware({ target: 'http://statements-service:4104', changeOrigin: true, pathRewrite: {'^/statements':''} }));
+app.use('/ledger', createProxyMiddleware({ target: 'http://ledger-service:4105', changeOrigin: true, pathRewrite: {'^/ledger':''} }));
+app.use('/cards', createProxyMiddleware({ target: 'http://cards-service:4106', changeOrigin: true, pathRewrite: {'^/cards':''} }));
+app.use('/loans', createProxyMiddleware({ target: 'http://loans-service:4107', changeOrigin: true, pathRewrite: {'^/loans':''} }));
+app.use('/kyc', createProxyMiddleware({ target: 'http://kyc-service:4108', changeOrigin: true, pathRewrite: {'^/kyc':''} }));
+app.use('/fraud', createProxyMiddleware({ target: 'http://fraud-service:4109', changeOrigin: true, pathRewrite: {'^/fraud':''} }));
+app.use('/analytics', createProxyMiddleware({ target: 'http://analytics-service:4110', changeOrigin: true, pathRewrite: {'^/analytics':''} }));
+app.use('/billing', createProxyMiddleware({ target: 'http://billing-service:4111', changeOrigin: true, pathRewrite: {'^/billing':''} }));
+app.use('/profile', createProxyMiddleware({ target: 'http://customer-profile-service:4112', changeOrigin: true, pathRewrite: {'^/profile':''} }));
+app.use('/email', createProxyMiddleware({ target: 'http://email-service:4113', changeOrigin: true, pathRewrite: {'^/email':''} }));
+app.use('/sms', createProxyMiddleware({ target: 'http://sms-service:4114', changeOrigin: true, pathRewrite: {'^/sms':''} }));
+
+const port = process.env.PORT || 8080;
+app.listen(port, ()=> console.log('API Gateway on', port));

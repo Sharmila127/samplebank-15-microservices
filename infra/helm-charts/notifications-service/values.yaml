@@ -1,0 +1,7 @@
+replicaCount: 1
+image:
+  repository: myregistry.example.com/notifications-service
+  tag: latest
+service:
+  type: ClusterIP
+  port: 80
